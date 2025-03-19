@@ -14,13 +14,7 @@ const ShopContextProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    const storedProducts = JSON.parse(localStorage.getItem("products"));
-    if (storedProducts) {
-      setProducts(storedProducts);
-    } else {
-      localStorage.setItem("products", JSON.stringify(all_products));
-      setProducts(all_products);
-    }
+    setProducts(all_products);
   }, []);
   return (
     <shopContext.Provider value={{ products }}>{children}</shopContext.Provider>

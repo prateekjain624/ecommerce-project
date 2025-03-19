@@ -5,29 +5,16 @@ import Productdisplay from "../Components/ProductDisplay/Productdisplay";
 const Product = () => {
   const { products } = useShopContext();
   const { productId } = useParams();
-  const [product, setProduct] = useState([]);
+  const [product, setProduct] = useState(null);
 
   useEffect(() => {
     const foundProduct = products.find((p) => p.id === Number(productId));
     if (foundProduct) {
       setProduct(foundProduct);
-    } else {
-      const storedProducts = JSON.parse(localStorage.getItem("products"));
-      if (storedProducts) {
-        const foundProduct = storedProducts.find(
-          (p) => p.id === Number(productId)
-        );
-        if (foundProduct) {
-          console.log(foundProduct);
-          setProduct(foundProduct);
-        } else {
-          console.log("Product not found in local storage");
-        }
-      }
     }
-  }, [productId, products]);
-  console.log(product);
-  return <div>{<Productdisplay product={product} />}</div>;
+  }, [products, productId]);
+
+  return <div>{product && <Productdisplay product={product} />}</div>;
 };
 
 export default Product;
