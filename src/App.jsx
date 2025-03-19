@@ -1,5 +1,5 @@
 import Navbar from "./Components/Navbar/Navbar";
-import { HashRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Shop from "./Pages/Shop";
 import ShopCategory from "./Pages/ShopCategory";
 import Product from "./Pages/Product";
@@ -15,7 +15,7 @@ import Signin from "./Pages/Signin";
 function App() {
   return (
     <>
-      <HashRouter>
+      <BrowserRouter>
         <ScrollToTop />
         <Navbar />
         <Routes>
@@ -41,7 +41,7 @@ function App() {
         </Routes>
         <Footer />
         <Routes></Routes>
-      </HashRouter>
+      </BrowserRouter>
     </>
   );
 }
