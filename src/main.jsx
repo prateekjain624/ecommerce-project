@@ -5,9 +5,7 @@ import ShopContextProvider from "./Context/ShopContext.jsx";
 import { AuthProvider } from "./Context/AuthContext.jsx";
 
 createRoot(document.getElementById("root")).render(
-  <AuthProvider>
-    <ShopContextProvider>
-      <App />
-    </ShopContextProvider>
-  </AuthProvider>
+  <ShopContextProvider>
+    <App />
+  </ShopContextProvider>
 );

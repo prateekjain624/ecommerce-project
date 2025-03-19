@@ -1,4 +1,4 @@
-import { createContext, useContext } from "react";
+import { createContext, useContext, useState } from "react";
 import { auth } from "../Firebase";
 import {
   createUserWithEmailAndPassword,
