@@ -2,11 +2,12 @@ import React from "react";
 import "../ProductDisplay/Productdisplay.css";
 import star_icon from "../Assets/star_icon.png";
 import star_dull_icon from "../Assets/star_dull_icon.png";
+import { useCartContext } from "../../Context/CartContext";
 const Productdisplay = ({ product }) => {
-  console.log(product);
+  const { addToCart } = useCartContext();
   return (
     <div className="productdisplay">
-      <div class="productdisplay-left">
+      <div className="productdisplay-left">
         <div className="productdisplay-img-list">
           <img src={product.image} alt="product-image" />
           <img src={product.image} alt="product-image" />
@@ -21,7 +22,7 @@ const Productdisplay = ({ product }) => {
           />
         </div>
       </div>
-      <div class="productdisplay-right">
+      <div className="productdisplay-right">
         <h1>{product.name}</h1>
         <div className="productdisplay-right-star">
           <img src={star_icon} alt="star-icon" />
@@ -51,7 +52,11 @@ const Productdisplay = ({ product }) => {
             <div>XXL</div>
           </div>
         </div>
-        <button className="add-to-cart" type="button">
+        <button
+          className="add-to-cart"
+          type="button"
+          onClick={() => addToCart(product)}
+        >
           ADD TO CART
         </button>
         <p className="productdisplay-right-category">

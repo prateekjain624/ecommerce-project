@@ -1,12 +1,32 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import "./Navbar.css";
 import logo from "../Assets/logo.png";
 import cart_icon from "../Assets/cart_icon.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuthContext } from "../../Context/AuthContext";
+import { GiHamburgerMenu } from "react-icons/gi";
+import { useCartContext } from "../../Context/CartContext";
 
 const Navbar = () => {
   const [menu, setMenu] = useState("shop");
+  const menuRef = useRef();
   const [searchQuery, setSearchQuery] = useState("");
+  const { currentUser, signout } = useAuthContext();
+  const navigate = useNavigate();
+  const { getTotatCartItems } = useCartContext();
+
+  const handleLogout = async () => {
+    try {
+      await signout();
+      navigate("/");
+    } catch (error) {
+      console.log("Error signing out:", error);
+    }
+  };
+
+  const btnToggle = () => {
+    menuRef.current.classList.toggle("nav-menu-visible");
+  };
 
   return (
     <div className="navbar">
@@ -15,33 +35,18 @@ const Navbar = () => {
         <p>SHOPPER</p>
       </div>
 
-      <ul className="nav-menu">
+      <ul className="nav-menu" ref={menuRef}>
         <li onClick={() => setMenu("shop")}>
-          <Link to="/" style={{ textDecoration: "none", color: "#626262" }}>
-            Shop
-          </Link>{" "}
-          {menu === "shop" ? <hr /> : ""}
+          <Link to="/">Shop</Link> {menu === "shop" ? <hr /> : ""}
         </li>
         <li onClick={() => setMenu("mens")}>
-          <Link to="/mens" style={{ textDecoration: "none", color: "#626262" }}>
-            Men
-          </Link>{" "}
-          {menu === "mens" ? <hr /> : ""}
+          <Link to="/mens">Men</Link> {menu === "mens" ? <hr /> : ""}
         </li>
         <li onClick={() => setMenu("womens")}>
-          <Link
-            to="/womens"
-            style={{ textDecoration: "none", color: "#626262" }}
-          >
-            Women
-          </Link>{" "}
-          {menu === "womens" ? <hr /> : ""}
+          <Link to="/womens">Women</Link> {menu === "womens" ? <hr /> : ""}
         </li>
         <li onClick={() => setMenu("kids")}>
-          <Link to="/kids" style={{ textDecoration: "none", color: "#626262" }}>
-            Kids
-          </Link>{" "}
-          {menu === "kids" ? <hr /> : ""}
+          <Link to="/kids">Kids</Link> {menu === "kids" ? <hr /> : ""}
         </li>
       </ul>
 
@@ -57,14 +62,28 @@ const Navbar = () => {
       </div>
 
       <div className="nav-login-cart">
-        <Link to="/signup">
-          <button type="button">Login</button>
-        </Link>
-
-        <Link to="/cart">
-          <img src={cart_icon} alt="cart-icon" />
-        </Link>
-        <div className="nav-cart-count">0</div>
+        {currentUser ? (
+          <>
+            <Link>
+              <button type="button" onClick={handleLogout}>
+                Logout
+              </button>
+            </Link>
+            <Link to="/cart">
+              <img src={cart_icon} alt="cart-icon" />
+            </Link>
+            <div className="nav-cart-count">{getTotatCartItems}</div>
+          </>
+        ) : (
+          <Link to="/signup">
+            <button type="button">Login/Signup</button>
+          </Link>
+        )}
+      </div>
+      <div className="nav-hamburger">
+        <button onClick={btnToggle} type="button">
+          <GiHamburgerMenu size="25" />
+        </button>
       </div>
     </div>
   );

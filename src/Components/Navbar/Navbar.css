@@ -1,10 +1,20 @@
+/* ============================== */
+/* BASE STYLES (DESKTOP) */
+/* ============================== */
 .navbar {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: 16px;
   box-shadow: 0 1px 3px -2px black;
+  background: white;
+  position: sticky;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
 }
 
+/* Logo */
 .navbar .nav-logo {
   display: flex;
   align-items: center;
@@ -13,26 +23,22 @@
 
 .nav-logo p {
   color: #171717;
-  font-size: 38px;
+  font-size: 28px;
   font-weight: 600;
 }
 
+/* Navigation Menu (Default) */
 .nav-menu {
   display: flex;
   align-items: center;
   list-style: none;
-  gap: 50px;
+  gap: 40px;
   color: #626262;
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 500;
 }
 
 .nav-menu li {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 3px;
   cursor: pointer;
 }
 
@@ -41,46 +47,15 @@
   width: 80%;
   height: 3px;
   border-radius: 10px;
-  background-color: #ff4141;
+  background: #ff4141;
 }
 
-.nav-login-cart {
-  display: flex;
-  align-items: center;
-  gap: 45px;
+.nav-menu a {
+  text-decoration: none;
+  color: #626262;
 }
 
-.nav-login-cart button {
-  width: 157px;
-  height: 58px;
-  outline: none;
-  border: 1px solid #7a7a7a;
-  border-radius: 75px;
-  color: #515151;
-  font-size: 20px;
-  font-weight: 500;
-  cursor: pointer;
-  background: white;
-}
-
-.nav-login-cart button:active {
-  background: #f1f1f1;
-}
-
-.nav-cart-count {
-  width: 22px;
-  height: 22px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: -35px;
-  margin-left: -55px;
-  border-radius: 11px;
-  font-size: 14px;
-  background: red;
-  color: white;
-}
-
+/* Search Box */
 .nav-search {
   display: flex;
   align-items: center;
@@ -110,4 +85,161 @@
 
 .nav-search button:hover {
   background: #e0484d;
+}
+
+/* Login & Cart */
+.nav-login-cart {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.nav-login-cart button {
+  width: 120px;
+  height: 45px;
+  border: 1px solid #7a7a7a;
+  border-radius: 25px;
+  color: #515151;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  background: white;
+}
+
+.nav-cart-count {
+  width: 22px;
+  height: 22px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: -30px;
+  margin-left: -40px;
+  border-radius: 11px;
+  font-size: 14px;
+  background: red;
+  color: white;
+}
+
+.nav-hamburger {
+  display: none;
+}
+
+.nav-hamburger button {
+  cursor: pointer;
+  background-color: #ff5a5f;
+}
+
+.nav-hamburger {
+  display: none; /* Show on smaller screens */
+}
+
+.nav-hamburger button {
+  background: none; /* Remove button background */
+  border: none; /* Remove button border */
+  cursor: pointer; /* Show pointer cursor */
+  padding: 8px; /* Add padding for better touch */
+  outline: none; /* Remove focus outline */
+}
+
+.nav-hamburger button:hover {
+  opacity: 0.8; /* Slight fade effect on hover */
+}
+
+/* ============================== */
+/* RESPONSIVE DESIGN */
+/* ============================== */
+
+/* Tablets & Mobile (max-width: 1200px) */
+@media (max-width: 1200px) {
+  .navbar {
+    padding: 12px 50px;
+  }
+
+  .nav-logo img {
+    width: 40px;
+  }
+
+  .nav-logo p {
+    font-size: 24px;
+  }
+  .nav-menu {
+    gap: 30px;
+    font-size: 16px;
+  }
+  .nav-login-cart {
+    gap: 30px;
+  }
+
+  .nav-cart-count {
+    margin-left: -40px;
+    font-size: 12px;
+  }
+}
+
+/* Mobile (max-width: 1024px) */
+@media (max-width: 1024px) {
+  .navbar {
+    padding: 12px 30px;
+  }
+
+  .nav-search {
+    display: none;
+  }
+  .nav-menu {
+    gap: 25px;
+    font-size: 14px;
+  }
+  .nav-search input {
+    width: 150px;
+  }
+  .nav-login-cart button {
+    width: 80px;
+    height: 35px;
+    font-size: 14px;
+  }
+  .nav-login-cart img {
+    width: 30px;
+  }
+  .nav-cart-count {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+/* Tablets & Mobile (max-width: 768px) */
+
+@media screen and (max-width: 800px) {
+  .navbar {
+    padding: 10px 20px;
+  }
+
+  .nav-search {
+    display: none;
+  }
+
+  .nav-hamburger {
+    display: block;
+  }
+
+  .nav-menu {
+    display: none;
+    height: 50px;
+    width: 100%;
+    position: absolute;
+    background-color: white;
+    justify-content: center;
+    top: 65px;
+  }
+
+  .nav-menu-visible {
+    display: flex;
+  }
+}
+
+/* Mobile (max-width: 500px) */
+
+@media screen and (max-width: 500px) {
+  .nav-search {
+    display: none;
+  }
 }
